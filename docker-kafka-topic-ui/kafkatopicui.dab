@@ -1,0 +1,33 @@
+{
+  "Services": {
+    "confluent-rest-proxy": {
+      "Env": [
+        "KAFKA_REST_BOOTSTRAP_SERVERS=192.168.0.121:9092,192.168.0.122:9092,192.168.0.123:9092", 
+        "KAFKA_REST_ZOOKEEPER_CONNECT=192.168.0.121:2181,192.168.0.122:2181,192.168.0.123:2181", 
+        "KAFKA_REST_LISTENERS=http://0.0.0.0:8082/", 
+        "KAFKA_REST_HOST_NAME=192.168.0.122", 
+        "KAFKA_REST_SCHEMA_REGISTRY_URL=http://localhost:8081/"
+      ], 
+      "Image": "docker.io/confluentinc/cp-kafka-rest@sha256:a834093c34fd298d3383870c2694946735bc04f10a163c0ce2fbe8a5c70b08e2", 
+      "Networks": []
+    }, 
+    "confluent-schema-registry": {
+      "Env": [
+        "SCHEMA_REGISTRY_HOST_NAME=192.168.0.122", 
+        "SCHEMA_REGISTRY_LISTENERS=http://0.0.0.0:8081", 
+        "SCHEMA_REGISTRY_KAFKASTORE_CONNECTION_URL=192.168.0.121:2181,192.168.0.122:2181,192.168.0.123:2181"
+      ], 
+      "Image": "docker.io/confluentinc/cp-schema-registry@sha256:818b7fbb97aa3a32058aa3d93a71d250f1f8533f3b75ff8e43f530566f8f2952", 
+      "Networks": []
+    }, 
+    "kafka-topics-ui": {
+      "Env": [
+        "KAFKA_REST_PROXY_URL=http://localhost:8082", 
+        "PROXY=TRUE"
+      ], 
+      "Image": "docker.io/landoop/kafka-topics-ui@sha256:ca34659dc7a62a23579cc23ffac6b8172ac54db91ee9abbab7a3caeb65a7195b", 
+      "Networks": []
+    }
+  }, 
+  "Version": "0.1"
+}
