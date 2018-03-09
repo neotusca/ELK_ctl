@@ -1,0 +1,24 @@
+cluster.name: es-cluster
+node.name: es-1
+
+path.data: /var/lib/elasticsearch,/var/lib/elasticsearch2
+path.logs: /var/log/elasticsearch
+
+network.host: 192.168.0.141
+http.port: 9200
+
+discovery.zen.ping.unicast.hosts: ["192.168.0.141:9300","192.168.0.142:9300","192.168.0.143:9300"]
+discovery.zen.minimum_master_nodes: 2
+node.master: true
+node.data: true
+
+bootstrap.system_call_filter: false
+
+## Added for elasticsearch-sql (plugin)##
+http.cors.enabled: true
+
+http.cors.allow-origin: "*"
+http.cors.allow-methods: OPTIONS, HEAD, GET, POST, PUT, DELETE
+http.cors.allow-headers: X-Requested-With,X-Auth-Token,Content-Type, Content-Length
+
+path.repo: ["/es-repo"]
